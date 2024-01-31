@@ -21,7 +21,7 @@ function init()
   
   renderer = new THREE.WebGLRenderer( { antialias : true } );
   renderer.setPixelRatio( window.devicePixelRatio  );
-  renderer.setSize( window.innerWidth, window.innerHeight );
+  renderer.setSize( window.innerWidth*.75, window.innerHeight*.75 );
   document.body.appendChild( renderer.domElement ); // we add the HTML element to the HTML page
   
   // ---------------- CAMERA ----------------
@@ -41,10 +41,10 @@ function init()
   
   // ---------------- 3D CUBE ----------------
   
-  const geometry = new THREE.BoxGeometry( 150, 150, 150 );
-  const material = new THREE.MeshPhongMaterial( {color: 0x00ffff} );
-  cube = new THREE.Mesh( geometry, material );
-  scene.add( cube );
+  // const geometry = new THREE.BoxGeometry( 150, 150, 150 );
+  // const material = new THREE.MeshPhongMaterial( {color: 0x00ffff} );
+  // cube = new THREE.Mesh( geometry, material );
+  // scene.add( cube );
 
   // ---------------- My Model ----------------
 
@@ -54,9 +54,9 @@ function init()
   //Load the file
   loader.load(
     `../public/models/realistic_human_eye.glb`,
-    function (gltf) {
+    function (glb) {
       //If the file is loaded, add it to the scene
-      object = gltf.scene;
+      object = glb.scene;
       scene.add(object);
     },
     function (xhr) {
