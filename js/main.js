@@ -56,7 +56,7 @@ function init()
     `../public/models/realistic_human_eye.glb`,
     function (glb) {
       //If the file is loaded, add it to the scene
-      object = glb.scene;
+      const object = glb.scene;
       scene.add(object);
     },
     function (xhr) {
