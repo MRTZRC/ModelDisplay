@@ -1,6 +1,9 @@
 
 import * as THREE from  'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
 
+// To allow for importing the .gltf file
+import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
+
 // Basic Threejs variables
 var scene;
 var camera;
@@ -42,6 +45,30 @@ function init()
   const material = new THREE.MeshPhongMaterial( {color: 0x00ffff} );
   cube = new THREE.Mesh( geometry, material );
   scene.add( cube );
+
+  // ---------------- My Model ----------------
+
+  //Instantiate a loader for the .gltf file
+  const loader = new GLTFLoader();
+
+  //Load the file
+  loader.load(
+    `../public/models/realistic_human_eye.glb`,
+    function (gltf) {
+      //If the file is loaded, add it to the scene
+      object = gltf.scene;
+      scene.add(object);
+    },
+    function (xhr) {
+      //While it is loading, log the progress
+      console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    },
+    function (error) {
+      //If there is an error, log it
+      console.error(error);
+    }
+  );
+
   
   // ---------------- STARTING THE RENDER LOOP ----------------
 
